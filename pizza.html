@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pizza</title>
+    </head>
+
+    <body>
+        Waqas Bhatti<br><br><br>
+
+        <b>Select your Crust type: ...$18.50</b>
+        <br>
+            <input type = "radio" id = "regular" name ="crust" value = "Regular">
+            Thin 
+            <br>
+            <input type = "radio" id = "deepdish" name ="crust" value = "Deep Dish">
+            <label for = "deepdish">Deep Dish ...+$2.85</label>
+            <br>
+            <input type = "radio" id = "grandma" name ="crust" value = "Grandma">
+            <label for = "grandma">Grandma ...+$5.17</label>
+            <br>
+            <input type = "radio" id = "hotdog" name ="crust" value = "HotDog Thing" checked>
+            <label for = "hotdog">HotDog Thing ...+$23.64</label>
+            <br>
+
+        <b>Select your toppings:</b>
+        <br>
+            <input type = "checkbox" id="topping1" name = "topping" value = "Pepperoni"> 
+            <p id = "text" style = "display:none" ></p>
+            Pepperoni ...+$2.88
+            <br>
+            <input type = "checkbox" id="topping2" name ="topping" value = "Extra Cheese">
+            <label for = "topping2"> Extra Cheese ...+$2.88</label>
+            <br>
+            <input type = "checkbox" id="topping3" name ="topping" value = "Sausage">
+            <label for = "topping3"> Sausage ...+$2.36</label>
+            <br>
+            <input type = "checkbox" id="topping4" name ="topping" value = "Black Olives">
+            <label for = "topping4"> Black Olives ...+$2.23</label>
+            <br>
+            <input type = "checkbox" id="topping5" name ="topping" value = "Anchovies">
+            <label for = "topping5"> Anchovies ...+$7.47</label>
+            <br>
+            <input type = "checkbox" id="topping6" name ="topping" value = "Mushrooms">
+            <label for = "topping6"> Mushrooms ...+$5.41</label>
+            <br>
+        
+        <b>Select your drink:</b>
+        <br>
+            <input type = "checkbox" id = "drink1" name = "drink" value = "Sprite">
+            Sprite ...$8.50
+            <br>
+            <input type = "checkbox" id = "drink2" name = "drink" value = "Coke">
+            <label for = "drink2"> Coke ...$3.01</label>
+            <br>
+            <input type = "checkbox" id = "drink3" name = "drink" value = "Coke Zero">
+            <label for = "drink3"> Coke Zero ...$3.02</label>
+            <br>
+            <input type = "checkbox" id = "drink4" name = "drink" value = "Lemonade">
+            <label for = "drink4"> Lemonade ...$2.17</label>
+            <br>
+
+
+        <input type="submit" value="Submit" onclick="submit()">
+
+        <br>
+        <button id = "cool" onclick = "coolfunc()"> Cool Button </button>
+
+        <br>
+        <button onclick = "restart()"> Try Again</button>
+            
+        <p id = "t"> </p>
+
+
+        <script>
+            //put our radio in variables to know if it's checked
+            var deep = document.getElementById("deepdish");
+            var gma = document.getElementById("grandma");
+            var hdog = document.getElementById("hotdog");
+            // we put our toppings checkboxes in variables to find total if checked
+            var toparray = document.getElementsByName("topping");
+
+            var pepperoni = document.getElementById("topping1");  //pepperoni
+            var echeese = document.getElementById("topping2");  //extra cheese
+            var sausage = document.getElementById("topping3");  //sausage
+            var bolives = document.getElementById("topping4");  //black olives
+            var anchovies = document.getElementById("topping5");  //anchovies
+            var mushr = document.getElementById("topping6");  //mushrooms
+            //put drink checkboxes in var to find total
+            var drinkarray = document.getElementsByName("drink");
+            var sprite = document.getElementById("drink1");
+            var coke = document.getElementById("drink2");
+            var coke0 = document.getElementById("drink3");
+            var lemonade = document.getElementById("drink4");
+
+            var total = 18.50;  //default base pizza thin crust = $18.50
+
+            /*function myFunction(){
+                submit();
+                document.getElementById("t").style.display = "none";
+            }*/                 //code to show total as we check box (no submitting)
+
+            //function to unselect all of specefic array
+            function unselect(x){
+                for(var i = 0; i < x.length; i++){
+                    x[i].checked=false;
+                }
+            }
+            //when press cool button. unselect everything and select deep dish, anchovies, bolives, coke
+            function coolfunc(){
+                    unselect(toparray);         //unselect all toppings
+                    pepperoni.checked = false;  //weird error where everything except pepperoni unselects so I did it manually
+                    unselect(drinkarray);       //unselect all drinks
+                    deep.checked = true;
+                    anchovies.checked = true;
+                    bolives.checked = true;
+                    coke.checked = true
+                }
+
+            function restart(){
+                unselect(toparray);
+                unselect(drinkarray);
+                pepperoni.checked = false;
+                hdog.checked = true;
+            }
+
+            //when we press the submit button. we will do the function that gets our total
+            function submit(){
+                //check price of crust
+                if(deep.checked == true){
+                    total = 21.35;
+                }
+                if(gma.checked == true){
+                    total = 23.67;
+                }
+                if(hdog.checked == true){
+                    total = 42.14;
+                }
+
+                /*
+                //try using less if statements
+                const topprice = [2.88, 2.36, 4.73, 2.23, 7.47, 5.41];
+                for (let i = 0; i < toparray.length; i ++){
+                    if (toparray[i].checked = true){
+                        total = total + topprice[i];
+                    }
+                }*/
+
+                //check price of toppings
+                if(pepperoni.checked == true){
+                    total = total + 2.88;
+                }
+                if(echeese.checked == true){
+                    total = total + 2.36;
+                }
+                if(sausage.checked == true){
+                    total = total + 4.73;
+                }
+                if(bolives.checked == true){
+                    total = total + 2.23;
+                }
+                if(anchovies.checked == true){
+                    total = total + 7.47;
+                }
+                if(mushr.checked == true){
+                    total = total + 5.41;
+                }
+
+                //check price of drinks
+                if(sprite.checked == true){
+                    total = total + 8.50;
+                }
+                if(coke.checked == true){
+                    total = total + 3.01;
+                }
+                if(coke0.checked == true){
+                    total = total + 3.02;
+                }
+                if(lemonade.checked == true){
+                    total = total + 2.17;
+                }
+
+                
+
+                total = total.toFixed(2);   
+                window.alert("Your total is $" + total);
+            }
+
+
+        </script>
+
+    </body>
+
+</html>
